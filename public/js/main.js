@@ -3,20 +3,25 @@ let analyze;
 let spectrum;
 let fft;
 let mic
+let player;
+let keyCount;
+let playback = false
 
 function preload() {
-  soundFormats('mp3', 'ogg');
-  sound = loadSound('assets/star-wars.mp3');
+  // soundFormats('mp3', 'ogg');
+  // sound = loadSound('assets/star-wars.mp3');
 }
 
 function setup() {
-  var cnv = createCanvas(500,500);
+  let cnv = createCanvas(500,500);
   //cnv.mouseClicked(togglePlay);
 
   fft = new p5.FFT(0.9, 1024);  // the largest value
   mic = new p5.AudioIn();
   mic.start();
   fft.setInput(mic);
+  player = new Player()
+  keyCount = {}
 }
 
 function draw() {
@@ -26,16 +31,18 @@ function draw() {
   var sample = sampleRate();
 
   //filter out some background noise
-  if (micLevel > 1.2) {
-    let frequency = getLoudestFrequency(spectrum);
-    let midi = freqToMidi(frequency)
 
-    if (frequency) {
-      //console.log('midi ' + midi);  // midi value
-      console.log('piano ', midi-20); // piano key
+  if (!playback) {
+    if (micLevel > 1) {
+      let frequency = getLoudestFrequency(spectrum);
+      let midi = freqToMidi(frequency)
+      if (frequency) {
+        // let note = Tonal.Note.fromMidi(midi)
+        // console.log(note)
+        // player.notes.push(note)
+      }
     }
   }
-
 }
 
 function getLoudestFrequency(spectrum) {
@@ -57,4 +64,36 @@ function getLoudestFrequency(spectrum) {
 }
 
 
-function mousePressed() { getAudioContext().resume() }
+
+
+function mousePressed() {
+  getAudioContext().resume()
+}
+
+
+function keyPressed() {
+  if (keyCode == 32) {
+    player.playNotes()
+    playback = true
+  }
+}
+
+
+// if (keyCount.hasOwnProperty(note)) {
+//   let count = keyCount[note]
+//   keyCount[note] = ++count
+// } else {
+//   keyCount[note] = 1
+// }
+//
+// let max = keyCount[note]
+//
+// Object.keys(keyCount).forEach((key) => {
+//   if (max < keyCount[key]) {
+//     max = key
+//   }
+// })
+//
+// player.notes.push(max)
+
+
