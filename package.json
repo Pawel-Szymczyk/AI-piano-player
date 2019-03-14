@@ -19,6 +19,8 @@
   "homepage": "https://github.com/bsplt/p5js-boilerplate#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
     "nodemon": "^1.18.10",
     "p5": "^0.7.3"
   }

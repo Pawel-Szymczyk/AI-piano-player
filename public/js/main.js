@@ -1,7 +1,8 @@
 
 let analyze;
 let spectrum;
-let ftt;
+let fft;
+let mic
 
 function preload() {
   soundFormats('mp3', 'ogg');
@@ -10,23 +11,29 @@ function preload() {
 
 function setup() {
   var cnv = createCanvas(500,500);
-  cnv.mouseClicked(togglePlay);
+  //cnv.mouseClicked(togglePlay);
 
-  fft = new p5.FFT(0.9, 16384);  // the largest value 
+  fft = new p5.FFT(0.9, 1024);  // the largest value
+  mic = new p5.AudioIn();
+  mic.start();
+  fft.setInput(mic);
 }
 
 function draw() {
+  let micLevel = mic.getLevel() * 100 //multiply by 100 to work with normal numbers instead of decimal
   spectrum = fft.analyze(); // A sound spectrum displays the different frequencies present in a sound.
-
   var waveform = fft.waveform();
   var sample = sampleRate();
 
-  let frequency = getLoudestFrequency(spectrum);
-  let midi = freqToMidi(frequency)
+  //filter out some background noise
+  if (micLevel > 1.2) {
+    let frequency = getLoudestFrequency(spectrum);
+    let midi = freqToMidi(frequency)
 
-  if (sound.isPlaying()) {
-    console.log('midi ' + midi);  // midi value
-    console.log('piano ', midi-20); // piano key
+    if (frequency) {
+      //console.log('midi ' + midi);  // midi value
+      console.log('piano ', midi-20); // piano key
+    }
   }
 
 }
@@ -49,11 +56,5 @@ function getLoudestFrequency(spectrum) {
   return loudestFreq;
 }
 
-// fade sound if mouse is over canvas
-function togglePlay() {
-  if (sound.isPlaying()) {
-    sound.pause();
-  } else {
-    sound.play();
-  }
-}
+
+function mousePressed() { getAudioContext().resume() }
