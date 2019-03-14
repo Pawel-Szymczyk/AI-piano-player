@@ -1,0 +1,14 @@
+TODO:
+    ☐ listen music @created(19-03-14 20:33)
+        ☐ recognize frequency @created(19-03-14 20:34)
+        ☐ recognize midi @created(19-03-14 20:34)
+        ☐ convert midi to piano keys @created(19-03-14 20:34)
+        ☐ map piano keys to letters @created(19-03-14 20:34)
+        ☐ print out letters in canvas @created(19-03-14 20:35)
+        ☐ recognize many piano keys at the same time (spectrum) @created(19-03-14 20:35)
+        ☐ print them out @created(19-03-14 20:36)
+
+    ☐ machine lerning @created(19-03-14 20:36)
+        ☐ create a set of all frequences @created(19-03-14 20:36)
+        ☐ get list of all piano sounds @created(19-03-14 20:37)
+        ☐ work on superwised learning ... @created(19-03-14 20:37)
