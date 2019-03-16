@@ -3,10 +3,11 @@ let analyze;
 let spectrum;
 let fft;
 let mic
-let players;
-let targetNotes = ["E6","Eb5","E6","Eb5","E6","B4","D5","C5", "A4"] //fur elise
+let population;
+let targetNotes = ['E5', 'Eb5', 'E5' ,'Eb5', 'E5' ,'B4', 'D5', "C5", "A4"] //fur elise
 let piano
-let lifespan = 200;
+let lifespan = 10;
+let counter;
 
 function preload() {
   // soundFormats('mp3', 'ogg');
@@ -19,32 +20,38 @@ function setup() {
   mic = new p5.AudioIn();
   mic.start();
   fft.setInput(mic);
-
-
   piano =  SampleLibrary.load({
     instruments: "piano"
   })
-
-  players = []
-  generatePlayers()
+  counter = 0;
+  population = new Population(piano)
+  population.createPopulation()
 }
 
 
 function draw() {
-  let micLevel = mic.getLevel() * 100 //multiply by 100 to work with normal numbers instead of decimal
-  spectrum = fft.analyze(); // A sound spectrum displays the different frequencies present in a sound.
-  //filter out some background noise
-
-  if (micLevel > 1) {
-    let frequency = getLoudestFrequency(spectrum);
-    let midi = freqToMidi(frequency)
-    if (frequency) {
-      // let note = Tonal.Note.fromMidi(midi)
-      // console.log(note)
-      // player.notes.push(note)
-    }
+  document.getElementById('counter').textContent = counter
+  if (counter === lifespan) {
+    removeElements()
+    counter = 0;
+    population.evaluate()
+    population.selection()
   }
+  counter++
+}
 
+
+function createNoteList(player) {
+  let container = select('#notes')
+  if (player.fitnessFactor > 0) {
+    let content = createP(player.dna.join(',') + ' fitnessFactor: ' + player.fitnessFactor)
+    let button = createButton('play dna');
+    button.mousePressed(() => {
+      player.playNotes()
+    })
+    content.child(button)
+    container.child(content)
+  }
 }
 
 function getLoudestFrequency(spectrum) {
@@ -69,41 +76,22 @@ function getLoudestFrequency(spectrum) {
 function keyPressed() {
   if (keyCode == 32) {
     getAudioContext().resume()
-    generatePlayers()
   }
 }
 
-function generatePlayers() {
-    players = []
-    for (let i = 0; i < 200; i++) {
-      players.push(new Player(piano))
-    }
 
+function getNoteByFrequency() {
+  let micLevel = mic.getLevel() * 100 //multiply by 100 to work with normal numbers instead of decimal
+  spectrum = fft.analyze(); // A sound spectrum displays the different frequencies present in a sound.
+  //filter out some background noise
 
-  players.forEach((p) => {
-    console.log(p.fitnessFactor)
-    if (p.fitnessFactor < 0.5) {
-      console.log(p)
+  if (micLevel > 1) {
+    let frequency = getLoudestFrequency(spectrum);
+    let midi = freqToMidi(frequency)
+    if (frequency) {
+      let note = Tonal.Note.fromMidi(midi)
+
     }
-  })
+  }
+
 }
-
-
-// if (keyCount.hasOwnProperty(note)) {
-//   let count = keyCount[note]
-//   keyCount[note] = ++count
-// } else {
-//   keyCount[note] = 1
-// }
-//
-// let max = keyCount[note]
-//
-// Object.keys(keyCount).forEach((key) => {
-//   if (max < keyCount[key]) {
-//     max = key
-//   }
-// })
-//
-// player.notes.push(max)
-
-

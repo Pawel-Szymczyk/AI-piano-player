@@ -2970,7 +2970,7 @@ module.exports={
             "namespace": "",
             "file": "lib/addons/p5.sound.js",
             "line": 10057,
-            "description": "<p>A phrase is a pattern of musical events over time, i.e.\na series of notes and rests.</p>\n\n<p>Phrases must be added to a p5.Part for playback, and\neach part can play multiple phrases at the same time.\nFor example, one Phrase might be a kick drum, another\ncould be a snare, and another could be the bassline.</p>\n\n<p>The first parameter is a name so that the phrase can be\nmodified or deleted later. The callback is a a function that\nthis phrase will call at every step—for example it might be\ncalled <code>playNote(value){}</code>. The array determines\nwhich value is passed into the callback at each step of the\nphrase. It can be numbers, an object with multiple numbers,\nor a zero (0) indicates a rest so the callback won&#39;t be called).</p>",
+            "description": "<p>A phrase is a pattern of musical events over time, i.e.\na series of dna and rests.</p>\n\n<p>Phrases must be added to a p5.Part for playback, and\neach part can play multiple phrases at the same time.\nFor example, one Phrase might be a kick drum, another\ncould be a snare, and another could be the bassline.</p>\n\n<p>The first parameter is a name so that the phrase can be\nmodified or deleted later. The callback is a a function that\nthis phrase will call at every step—for example it might be\ncalled <code>playNote(value){}</code>. The array determines\nwhich value is passed into the callback at each step of the\nphrase. It can be numbers, an object with multiple numbers,\nor a zero (0) indicates a rest so the callback won&#39;t be called).</p>",
             "is_constructor": 1,
             "params": [
                 {
@@ -3231,7 +3231,7 @@ module.exports={
             "namespace": "",
             "file": "lib/addons/p5.sound.js",
             "line": 11943,
-            "description": "<p>An AudioVoice is used as a single voice for sound synthesis.\nThe PolySynth class holds an array of AudioVoice, and deals\nwith voices allocations, with setting notes to be played, and\nparameters to be set.</p>\n",
+            "description": "<p>An AudioVoice is used as a single voice for sound synthesis.\nThe PolySynth class holds an array of AudioVoice, and deals\nwith voices allocations, with setting dna to be played, and\nparameters to be set.</p>\n",
             "is_constructor": 1,
             "params": [
                 {
@@ -19081,7 +19081,7 @@ module.exports={
         {
             "file": "lib/addons/p5.sound.js",
             "line": 437,
-            "description": "<p>Returns the frequency value of a MIDI note value.\nGeneral MIDI treats notes as integers where middle C\nis 60, C# is 61, D is 62 etc. Useful for generating\nmusical frequencies with oscillators.</p>\n",
+            "description": "<p>Returns the frequency value of a MIDI note value.\nGeneral MIDI treats dna as integers where middle C\nis 60, C# is 61, D is 62 etc. Useful for generating\nmusical frequencies with oscillators.</p>\n",
             "itemtype": "method",
             "name": "midiToFreq",
             "params": [
@@ -19096,7 +19096,7 @@ module.exports={
                 "type": "Number"
             },
             "example": [
-                "\n<div><code>\nvar notes = [60, 64, 67, 72];\nvar i = 0;\n\nfunction setup() {\n  osc = new p5.Oscillator('Triangle');\n  osc.start();\n  frameRate(1);\n}\n\nfunction draw() {\n  var freq = midiToFreq(notes[i]);\n  osc.freq(freq);\n  i++;\n  if (i >= notes.length){\n    i = 0;\n  }\n}\n</code></div>"
+                "\n<div><code>\nvar dna = [60, 64, 67, 72];\nvar i = 0;\n\nfunction setup() {\n  osc = new p5.Oscillator('Triangle');\n  osc.start();\n  frameRate(1);\n}\n\nfunction draw() {\n  var freq = midiToFreq(dna[i]);\n  osc.freq(freq);\n  i++;\n  if (i >= dna.length){\n    i = 0;\n  }\n}\n</code></div>"
             ],
             "class": "p5",
             "module": "p5.sound",
@@ -22868,7 +22868,7 @@ module.exports={
         {
             "file": "lib/addons/p5.sound.js",
             "line": 10738,
-            "description": "<p>number of quarter notes in a measure (defaults to 4)</p>\n",
+            "description": "<p>number of quarter dna in a measure (defaults to 4)</p>\n",
             "itemtype": "property",
             "name": "timeSignature",
             "type": "Number",
@@ -23584,9 +23584,9 @@ module.exports={
         {
             "file": "lib/addons/p5.sound.js",
             "line": 11974,
-            "description": "<p>An object that holds information about which notes have been played and\nwhich notes are currently being played. New notes are added as keys\non the fly. While a note has been attacked, but not released, the value of the\nkey is the audiovoice which is generating that note. When notes are released,\nthe value of the key becomes undefined.</p>\n",
+            "description": "<p>An object that holds information about which dna have been played and\nwhich dna are currently being played. New dna are added as keys\non the fly. While a note has been attacked, but not released, the value of the\nkey is the audiovoice which is generating that note. When dna are released,\nthe value of the key becomes undefined.</p>\n",
             "itemtype": "property",
-            "name": "notes",
+            "name": "dna",
             "class": "p5.PolySynth",
             "module": "p5.sound",
             "submodule": "p5.sound"
@@ -23650,7 +23650,7 @@ module.exports={
         {
             "file": "lib/addons/p5.sound.js",
             "line": 12036,
-            "description": "<p>noteADSR sets the envelope for a specific note that has just been triggered.\nUsing this method modifies the envelope of whichever audiovoice is being used\nto play the desired note. The envelope should be reset before noteRelease is called\nin order to prevent the modified envelope from being used on other notes.</p>\n",
+            "description": "<p>noteADSR sets the envelope for a specific note that has just been triggered.\nUsing this method modifies the envelope of whichever audiovoice is being used\nto play the desired note. The envelope should be reset before noteRelease is called\nin order to prevent the modified envelope from being used on other dna.</p>\n",
             "itemtype": "method",
             "name": "noteADSR",
             "params": [
@@ -23692,7 +23692,7 @@ module.exports={
         {
             "file": "lib/addons/p5.sound.js",
             "line": 12064,
-            "description": "<p>Set the PolySynths global envelope. This method modifies the envelopes of each\nmonosynth so that all notes are played with this envelope.</p>\n",
+            "description": "<p>Set the PolySynths global envelope. This method modifies the envelopes of each\nmonosynth so that all dna are played with this envelope.</p>\n",
             "itemtype": "method",
             "name": "setADSR",
             "params": [
@@ -28524,7 +28524,7 @@ Promise$2.prototype = {
     The primary way of interacting with a promise is through its `then` method,
     which registers callbacks to receive either a promise's eventual value or the
     reason why the promise cannot be fulfilled.
-  
+
     ```js
     findUser().then(function(user){
       // user is available
@@ -28532,14 +28532,14 @@ Promise$2.prototype = {
       // user is unavailable, and you are given the reason why
     });
     ```
-  
+
     Chaining
     --------
-  
+
     The return value of `then` is itself a promise.  This second, 'downstream'
     promise is resolved with the return value of the first promise's fulfillment
     or rejection handler, or rejected if the handler throws an exception.
-  
+
     ```js
     findUser().then(function (user) {
       return user.name;
@@ -28549,7 +28549,7 @@ Promise$2.prototype = {
       // If `findUser` fulfilled, `userName` will be the user's name, otherwise it
       // will be `'default name'`
     });
-  
+
     findUser().then(function (user) {
       throw new Error('Found user, but still unhappy');
     }, function (reason) {
@@ -28562,7 +28562,7 @@ Promise$2.prototype = {
     });
     ```
     If the downstream promise does not specify a rejection handler, rejection reasons will be propagated further downstream.
-  
+
     ```js
     findUser().then(function (user) {
       throw new PedagogicalException('Upstream error');
@@ -28574,15 +28574,15 @@ Promise$2.prototype = {
       // The `PedgagocialException` is propagated all the way down to here
     });
     ```
-  
+
     Assimilation
     ------------
-  
+
     Sometimes the value you want to propagate to a downstream promise can only be
     retrieved asynchronously. This can be achieved by returning a promise in the
     fulfillment or rejection handler. The downstream promise will then be pending
     until the returned promise is settled. This is called *assimilation*.
-  
+
     ```js
     findUser().then(function (user) {
       return findCommentsByAuthor(user);
@@ -28590,9 +28590,9 @@ Promise$2.prototype = {
       // The user's comments are now available
     });
     ```
-  
+
     If the assimliated promise rejects, then the downstream promise will also reject.
-  
+
     ```js
     findUser().then(function (user) {
       return findCommentsByAuthor(user);
@@ -28602,15 +28602,15 @@ Promise$2.prototype = {
       // If `findCommentsByAuthor` rejects, we'll have the reason here
     });
     ```
-  
+
     Simple Example
     --------------
-  
+
     Synchronous Example
-  
+
     ```javascript
     let result;
-  
+
     try {
       result = findResult();
       // success
@@ -28618,9 +28618,9 @@ Promise$2.prototype = {
       // failure
     }
     ```
-  
+
     Errback Example
-  
+
     ```js
     findResult(function(result, err){
       if (err) {
@@ -28630,9 +28630,9 @@ Promise$2.prototype = {
       }
     });
     ```
-  
+
     Promise Example;
-  
+
     ```javascript
     findResult().then(function(result){
       // success
@@ -28640,15 +28640,15 @@ Promise$2.prototype = {
       // failure
     });
     ```
-  
+
     Advanced Example
     --------------
-  
+
     Synchronous Example
-  
+
     ```javascript
     let author, books;
-  
+
     try {
       author = findAuthor();
       books  = findBooksByAuthor(author);
@@ -28657,19 +28657,19 @@ Promise$2.prototype = {
       // failure
     }
     ```
-  
+
     Errback Example
-  
+
     ```js
-  
+
     function foundBooks(books) {
-  
+
     }
-  
+
     function failure(reason) {
-  
+
     }
-  
+
     findAuthor(function(author, err){
       if (err) {
         failure(err);
@@ -28694,9 +28694,9 @@ Promise$2.prototype = {
       }
     });
     ```
-  
+
     Promise Example;
-  
+
     ```javascript
     findAuthor().
       then(findBooksByAuthor).
@@ -28706,7 +28706,7 @@ Promise$2.prototype = {
       // something went wrong
     });
     ```
-  
+
     @method then
     @param {Function} onFulfilled
     @param {Function} onRejected
@@ -28718,25 +28718,25 @@ Promise$2.prototype = {
   /**
     `catch` is simply sugar for `then(undefined, onRejection)` which makes it the same
     as the catch block of a try/catch statement.
-  
+
     ```js
     function findAuthor(){
       throw new Error('couldn't find that author');
     }
-  
+
     // synchronous
     try {
       findAuthor();
     } catch(reason) {
       // something went wrong
     }
-  
+
     // async with promises
     findAuthor().catch(function(reason){
       // something went wrong
     });
     ```
-  
+
     @method catch
     @param {Function} onRejection
     Useful for tooling.
@@ -29224,10 +29224,10 @@ function Data(source, dest) {
   this.sourceIndex = 0;
   this.tag = 0;
   this.bitcount = 0;
-  
+
   this.dest = dest;
   this.destLen = 0;
-  
+
   this.ltree = new Tree();  /* dynamic length/symbol tree */
   this.dtree = new Tree();  /* dynamic distance tree */
 }
@@ -29369,7 +29369,7 @@ function tinf_decode_symbol(d, t) {
     d.tag |= d.source[d.sourceIndex++] << d.bitcount;
     d.bitcount += 8;
   }
-  
+
   var sum = 0, cur = 0, len = 0;
   var tag = d.tag;
 
@@ -29382,7 +29382,7 @@ function tinf_decode_symbol(d, t) {
     sum += t.table[len];
     cur -= t.table[len];
   } while (cur >= 0);
-  
+
   d.tag = tag;
   d.bitcount -= len;
 
@@ -29493,7 +29493,7 @@ function tinf_inflate_block_data(d, lt, dt) {
 function tinf_inflate_uncompressed_block(d) {
   var length, invlength;
   var i;
-  
+
   /* unread from bitbuffer */
   while (d.bitcount > 8) {
     d.sourceIndex--;
@@ -29566,7 +29566,7 @@ function tinf_uncompress(source, dest) {
     else
       { return d.dest.subarray(0, d.destLen); }
   }
-  
+
   return d.dest;
 }
 
@@ -69105,9 +69105,9 @@ p5.RendererGL.prototype.ortho = function(left, right, bottom, top, near, far) {
   this.uPMatrix = p5.Matrix.identity();
 
   // prettier-ignore
-  this.uPMatrix.set(  x,  0,  0,  0, 
-                      0, -y,  0,  0, 
-                      0,  0,  z,  0, 
+  this.uPMatrix.set(  x,  0,  0,  0,
+                      0, -y,  0,  0,
+                      0,  0,  z,  0,
                      tx, ty, tz,  1);
 
   this._curCamera = 'custom';

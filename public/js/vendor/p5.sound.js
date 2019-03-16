@@ -436,7 +436,7 @@ helpers = function () {
   };
   /**
    *  Returns the frequency value of a MIDI note value.
-   *  General MIDI treats notes as integers where middle C
+   *  General MIDI treats dna as integers where middle C
    *  is 60, C# is 61, D is 62 etc. Useful for generating
    *  musical frequencies with oscillators.
    *
@@ -445,7 +445,7 @@ helpers = function () {
    *  @return {Number} Frequency value of the given MIDI note
    *  @example
    *  <div><code>
-   *  var notes = [60, 64, 67, 72];
+   *  var dna = [60, 64, 67, 72];
    *  var i = 0;
    *
    *  function setup() {
@@ -455,10 +455,10 @@ helpers = function () {
    *  }
    *
    *  function draw() {
-   *    var freq = midiToFreq(notes[i]);
+   *    var freq = midiToFreq(dna[i]);
    *    osc.freq(freq);
    *    i++;
-   *    if (i >= notes.length){
+   *    if (i >= dna.length){
    *      i = 0;
    *    }
    *  }
@@ -10056,7 +10056,7 @@ looper = function () {
   };
   /**
    *  <p>A phrase is a pattern of musical events over time, i.e.
-   *  a series of notes and rests.</p>
+   *  a series of dna and rests.</p>
    *
    *  <p>Phrases must be added to a p5.Part for playback, and
    *  each part can play multiple phrases at the same time.
@@ -10736,7 +10736,7 @@ soundloop = function () {
     }
   });
   /**
-   * number of quarter notes in a measure (defaults to 4)
+   * number of quarter dna in a measure (defaults to 4)
    * @property {Number} timeSignature
    */
   Object.defineProperty(p5.SoundLoop.prototype, 'timeSignature', {
@@ -11650,7 +11650,7 @@ audioVoice = function () {
     p5sound.soundArray.push(this);
   };
   /**
-   * This method converts midi notes specified as a string "C4", "Eb3"...etc
+   * This method converts midi dna specified as a string "C4", "Eb3"...etc
    * to frequency
    * @private
    * @method  _setNote
@@ -11943,7 +11943,7 @@ polysynth = function () {
   /**
   *  An AudioVoice is used as a single voice for sound synthesis.
   *  The PolySynth class holds an array of AudioVoice, and deals
-  *  with voices allocations, with setting notes to be played, and
+  *  with voices allocations, with setting dna to be played, and
   *  parameters to be set.
   *
   *  @class p5.PolySynth
@@ -11972,10 +11972,10 @@ polysynth = function () {
     //audiovoices will contain polyValue many monophonic synths
     this.audiovoices = [];
     /**
-     * An object that holds information about which notes have been played and
-     * which notes are currently being played. New notes are added as keys
+     * An object that holds information about which dna have been played and
+     * which dna are currently being played. New dna are added as keys
      * on the fly. While a note has been attacked, but not released, the value of the
-     * key is the audiovoice which is generating that note. When notes are released,
+     * key is the audiovoice which is generating that note. When dna are released,
      * the value of the key becomes undefined.
      * @property notes
      */
@@ -12037,7 +12037,7 @@ polysynth = function () {
    *  noteADSR sets the envelope for a specific note that has just been triggered.
    *  Using this method modifies the envelope of whichever audiovoice is being used
    *  to play the desired note. The envelope should be reset before noteRelease is called
-   *  in order to prevent the modified envelope from being used on other notes.
+   *  in order to prevent the modified envelope from being used on other dna.
    *
    *  @method  noteADSR
    *  @param {Number} [note]        Midi note on which ADSR should be set.
@@ -12059,11 +12059,11 @@ polysynth = function () {
     var now = p5sound.audiocontext.currentTime;
     var timeFromNow = timeFromNow || 0;
     var t = now + timeFromNow;
-    this.audiovoices[this.notes[note].getValueAtTime(t)].setADSR(a, d, s, r);
+    this.audiovoices[this.dna[note].getValueAtTime(t)].setADSR(a, d, s, r);
   };
   /**
    * Set the PolySynths global envelope. This method modifies the envelopes of each
-   * monosynth so that all notes are played with this envelope.
+   * monosynth so that all dna are played with this envelope.
    *
    *  @method  setADSR
    *  @param {Number} [note]        Midi note on which ADSR should be set.
@@ -12103,13 +12103,13 @@ polysynth = function () {
     var tFromNow = secondsFromNow || 0;
     //this value is used by this._voicesInUse
     var t = now + tFromNow;
-    //Convert note to frequency if necessary. This is because entries into this.notes
+    //Convert note to frequency if necessary. This is because entries into this.dna
     //should be based on frequency for the sake of consistency.
     var note = typeof _note === 'string' ? this.AudioVoice.prototype._setNote(_note) : typeof _note === 'number' ? _note : 440;
     var velocity = _velocity === undefined ? 1 : _velocity;
     var currentVoice;
     //Release the note if it is already playing
-    if (this.notes[note] !== undefined && this.notes[note].getValueAtTime(t) !== null) {
+    if (this.dna[note] !== undefined && this.dna[note].getValueAtTime(t) !== null) {
       this.noteRelease(note, 0);
     }
     //Check to see how many voices are in use at the time the note will start
@@ -12121,10 +12121,10 @@ polysynth = function () {
       this.noteRelease(oldestNote);
       this._oldest = (this._oldest + 1) % (this.polyValue - 1);
     }
-    //Overrite the entry in the notes object. A note (frequency value)
+    //Overrite the entry in the dna object. A note (frequency value)
     //corresponds to the index of the audiovoice that is playing it
-    this.notes[note] = new TimelineSignal();
-    this.notes[note].setValueAtTime(currentVoice, t);
+    this.dna[note] = new TimelineSignal();
+    this.dna[note].setValueAtTime(currentVoice, t);
     //Find the scheduled change in this._voicesInUse that will be previous to this new note
     //Add 1 and schedule this value at time 't', when this note will start playing
     var previousVal = this._voicesInUse._searchBefore(t) === null ? 0 : this._voicesInUse._searchBefore(t).value;
@@ -12170,12 +12170,12 @@ polysynth = function () {
    *
    */
   p5.PolySynth.prototype.noteRelease = function (_note, secondsFromNow) {
-    //Make sure note is in frequency inorder to query the this.notes object
+    //Make sure note is in frequency inorder to query the this.dna object
     var note = typeof _note === 'string' ? this.AudioVoice.prototype._setNote(_note) : typeof _note === 'number' ? _note : this.audiovoices[this._newest].oscillator.freq().value;
     var now = p5sound.audiocontext.currentTime;
     var tFromNow = secondsFromNow || 0;
     var t = now + tFromNow;
-    if (this.notes[note].getValueAtTime(t) === null) {
+    if (this.dna[note].getValueAtTime(t) === null) {
       console.warn('Cannot release a note that is not already playing');
     } else {
       //Find the scheduled change in this._voicesInUse that will be previous to this new note
@@ -12184,8 +12184,8 @@ polysynth = function () {
       this._voicesInUse.setValueAtTime(previousVal - 1, t);
       //Then update all scheduled values that follow to decrease by 1
       this._updateAfter(t, -1);
-      this.audiovoices[this.notes[note].getValueAtTime(t)].triggerRelease(tFromNow);
-      this.notes[note].setValueAtTime(null, t);
+      this.audiovoices[this.dna[note].getValueAtTime(t)].triggerRelease(tFromNow);
+      this.dna[note].setValueAtTime(null, t);
       this._newest = this._newest === 0 ? 0 : (this._newest - 1) % (this.polyValue - 1);
     }
   };
