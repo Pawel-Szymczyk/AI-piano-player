@@ -3,7 +3,7 @@ class Population {
   constructor(piano) {
     this.piano = piano
     this.players = []
-    this.popSize = 200
+    this.popSize = 1000
     this.matingPool = []
     this.createPopulation()
   }

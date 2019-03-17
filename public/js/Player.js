@@ -35,12 +35,15 @@ class Player {
   }
 
   playNotes() {
-    let counter = 0;
-    this.dna.forEach((note) => {
-      this.piano.toMaster()
-      this.piano.triggerAttackRelease(note, 1, counter)
-      counter+=0.3
-    })
+
+    for (let i = 0; i < this.dna.length; i++) {
+      setTimeout(() => {
+        this.piano.toggleKey(Tonal.midi(this.dna[i]), true)
+        setTimeout(() => {
+          this.piano.toggleKey(Tonal.midi(this.dna[i]), false)
+        }, i*350)
+      }, i*1000 );
+    }
   }
 
   calculateFitness() {
@@ -64,9 +67,9 @@ class Player {
   }
 
   getRandomMidiNote() {
-    return random(Tonal.midi("A4"),Tonal.midi("E5"))
+    // return random(Tonal.midi("A4"),Tonal.midi("E5"))
 
-    //random(21,108)
+    return random(Tonal.midi("A0"),Tonal.midi("C8"))
   }
 
 }
